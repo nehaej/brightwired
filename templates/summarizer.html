@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Smart Text Tool{% endblock %}
+{% block header_title %}Smart Text Tool{% endblock %}
+
+{% block content %}
+
+<form id="combinedForm" method="POST" action="/summarizer">
+
+    <!-- Brain Translator -->
+    <section class="mode-slct">
+        <p>Paste your text below and choose a simplification mode:</p>
+        <select name="mode">
+            <option value="Child Core">🧒 Child Mode</option>
+            <option value="Academic-Lite">📚 Academic-Lite Mode</option>
+            <option value="Conversational">💬 Conversational Mode</option>
+        </select>
+    </section>
+
+    <!-- Adaptive Summarizer Length -->
+    <section class="lengths">
+        <p>Optional: Summarize your text</p>
+        <label for="length">Choose summary length:</label>
+        <select name="length">
+            <option value="tldr">⚡ TL;DR (1-2 lines)</option>
+            <option value="medium">📚 Medium (3–5 lines)</option>
+            <option value="full">🧠 Lengthy (1 paragraph)</option>
+            <option value="as is">No summarisation</option>
+        </select>
+    </section>
+
+    
+    <section class="text-input">
+        <label for="text">Enter Your Text:</label>
+        <textarea id="text" name="text" rows="20" cols="100" placeholder="Paste your text here..." required></textarea>
+    </section>
+
+    <button type="submit" class="action-button">Process Text!</button>
+</form>
+
+
+<section class="output-section">
+    <h2>Your Processed Output:</h2>
+
+    <div id="loader" style="display:none;" aria-live="polite">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span>Processing your input…</span>
+    </div>
+
+    <p id="output-text">{{ output or "[Your result will appear here]" }}</p>
+
+    <p><strong>Keywords:</strong> <span id="keywords">{{ keywords | join(", ") }}</span></p>
+
+    <p id="improve">{{ improve }}</p>
+    
+
+    <button onclick="speakSummary(document.getElementById('output-text').innerText)">🔊 Listen</button>
+</section>
+
+{% block scripts %}
+{{ super() }}
+<script>
+function speakSummary(text) {
+    const msg = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(msg);
+}
+
+// Minimal JS for loader + async form submission
+const form = document.getElementById("combinedForm");
+const loader = document.getElementById("loader");
+const outputText = document.getElementById("output-text");
+
+form.onsubmit = async function(e) {
+    e.preventDefault();
+    loader.style.display = "flex";
+    outputText.textContent = "";
+
+    try {
+        const response = await fetch(form.action, {
+            method: "POST",
+            headers: { "X-Requested-With": "fetch" },
+            body: new FormData(form)
+        });
+
+        const data = await response.json();   
+
+        outputText.textContent = data.output;
+
+        document.getElementById("improve").textContent = data.improve;
+        document.getElementById("keywords").textContent = data.keywords.join(", ");
+
+    } catch (err) {
+        outputText.textContent = "Something went wrong. Please try again.";
+    } finally {
+        loader.style.display = "none";  // HIDE loader
+    }
+};
+
+</script>
+{% endblock %}
+
+{% endblock %}

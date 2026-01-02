@@ -1,0 +1,88 @@
+<!-- NeuroMatch Planner -->
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block title %}Planner{% endblock %}
+
+{% block header_title %}Planner{% endblock %} 
+
+{% block content %}
+
+        <section class="intro">
+            <p>Break down your tasks and get a custom-paced plan that fits your energy and focus level.</p>
+            <p>One task per line. Keep it short and straight to the point.</p>
+            <br>
+        </section>
+
+        <form method="POST" action="/planner">  <!--how focused u feeling? Very focused,Not so focused,Exhausted-cant think str-->
+          <section class="task-info">
+            <label for="task1" >Tell us Your main task in 3 words.</label>
+            <input type="text" id="task1" name="task1" placeholder="eg.Math Homework"/>
+            <p>Deadline:</p>
+            <label for="days">Days:</label>
+            <input type="number" id="days-1" name="days-1" placeholder="eg.72 deadline"/>
+            <label for="hours">Hours(if applicable):</label>
+            <input type="number" id="hours-1" name="hours-1" placeholder="eg,72 deadline"/>
+
+            <br><br><br><br>
+            <label for="task2" >Tell us Your main task in 3 words.</label>
+            <input type="text" id="task2" name="task2" placeholder="eg.Science Project"/>
+            <p>Deadline:</p>
+            <label for="days">Days:</label>
+            <input type="number" id="days-2" name="days-2" placeholder="eg.72 deadline"/>
+            <label for="hours">Hours(if applicable):</label>
+            <input type="number" id="hours-2" name="hours-2" placeholder="eg,72 deadline"/>
+
+            <br><br><br><br>
+            <label for="task3" >Tell us Your main task in 3 words.</label>
+            <input type="text" id="task3" name="task3" placeholder="eg.English Essay"/>
+            <p>Deadline:</p>
+            <label for="days">Days:</label>
+            <input type="number" id="days-3" name="days-3" placeholder="eg.72 deadline"/>
+            <label for="hours">Hours(if applicable):</label>
+            <input type="number" id="hours-3" name="hours-3" placeholder="eg,72 deadline"/>
+
+            <br><br><br><br>
+            <label for="task4" >Tell us Your main task in 3 words.</label>
+            <input type="text" id="task4" name="task4" placeholder="eg.History Write-Up"/>
+            <p>Deadline:</p>
+            <label for="days">Days:</label>
+            <input type="number" id="days-4" name="days-4" placeholder="eg.72 deadline"/>
+            <label for="hours">Hours(if applicable):</label>
+            <input type="number" id="hours-4" name="hours-4" placeholder="eg,72 deadline"/>
+  
+            <br><br><br><br>
+            <label for="task5" >Tell us Your main task in 3 words.</label>
+            <input type="text" id="task5" name="task5" placeholder="eg.WoodWorking Project"/>
+            <p>Deadline in:</p>
+            <label for="days">Days:</label>
+            <input type="number" id="days-5" name="days-5" placeholder="eg,72 deadline"/>
+            <label for="hours">Hours(if applicable):</label>
+            <input type="number" id="hours-5" name="hours-5" placeholder="eg,72 deadline"/>
+          </section>
+        
+          <section class="choose">
+              <label for="focus-level">How focused are you feeling today?</label>
+              <br>
+              <select id="focus-level" name="focus-level">
+                  <option value="low">😮‍💨 Low (Break-heavy)</option>
+                  <option value="medium">🙂 Medium (Balanced)</option>
+                  <option value="high">⚡ High (Power mode)</option>
+              </select>
+              <br><br>
+              <label for="time">How much time (minutes) are you able to work today in total?</label>
+              <br>
+              <input type="number" id="duration" name="duration" placeholder="e.g., 120"required/>
+              <br><br>
+              <section class="input">
+                <button type="submit" class="action-button">Generate My Plan!</button>
+              </section>
+          </section>
+        </form>
+        
+        <section class="plan">
+        <h2>Your Custom Plan:</h2>
+        <pre id="plan">{{ plan or "[Your custom plan will appear here]" }}</pre>
+        </section>
+
+{% endblock %}

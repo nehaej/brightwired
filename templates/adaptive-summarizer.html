@@ -1,0 +1,60 @@
+<!-- Adaptive-Summarizer -->
+<!DOCTYPE html>
+
+{% extends "base.html" %}
+
+{% block title %}Adaptive Summarizer{% endblock %}
+
+{% block header_title %}Adaptive Summarizer{% endblock %} 
+
+{% block content %}
+
+            <section class="instructions">
+                <p>How do you want to summarize your text?</p>
+                <br>
+            </section>
+            <form method="post" action="/adap-summarizer">
+                <section class="lengths">
+                    <label for="length">Choose length:</label>
+                    <select required id="length" name="length">
+                        <option value="tldr">⚡ TL;DR (1-2 lines)</option>
+                        <option value="medium">📚 Medium (3–5 lines)</option>
+                        <option value="full">🧠 Lengthy (1 paragraph)</option>
+                    </select>
+                    <br><br>
+                </section>
+
+                <section class="complex text">
+                    <label for="text">Enter Your Text:</label>
+                    <textarea required id="text" name="text" rows="20" cols="100" placeholder="Add your text!"></textarea>
+                    <br>
+    
+                    <button type="submit" id="summary" class="action-button">Summarize!</button>
+                    <br>
+                </section>
+            </form>
+        
+            <form id="brainform"> 
+                <section class="output-section">
+                    <h2>Your Summarized Output:</h2>
+                    <div id="loader" style="display:none;" aria-live="polite" aria-busy="true">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span>Processing your input…</span>
+                    </div>
+                    <p id="output-text">{{ ans if ans else '[Your result will appear here]' }}</p>
+                    <br><br>
+                    <script>
+                        function speakSummary(text) {
+                            const msg = new SpeechSynthesisUtterance(text);
+                            window.speechSynthesis.speak(msg);
+                        }
+                    </script>
+
+                    <button onclick="speakSummary(document.getElementById('response').innerText)">🔊</button>
+                    
+                </section>
+            </form>
+            
+{% endblock %}

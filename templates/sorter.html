@@ -1,0 +1,71 @@
+<!-- NeuroMatch Planner -->
+{% extends "base.html" %}
+
+{% block title %}Sorter{% endblock %}
+
+{% block header_title %}Sorter{% endblock %} 
+
+{% block content %}
+
+        <form id="sorterForm" method="post" action="/sorter">
+            <section class="input">
+                <p>Input your thoughts and get a stuctured todo list back.</p>
+                <br>
+                <textarea id="text" name="text" rows="10" cols="50" placeholder="Enter Your Text"></textarea>
+                <br><br>
+                <button class="submit">Sort</button>
+            </section>
+        </form>
+
+        <section class="output">
+            <h2>Your List:</h2>
+            <div id="loader" style="display:none;" aria-live="polite">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span>Processing your input…</span>
+            </div>
+
+            <p id="output-text" style="white-space: pre-wrap;">{{ todo or "[Your result will appear here]" }}</p>
+        </section>
+
+{% block scripts %}
+{{ super() }}
+<script>
+function speakSummary(text) {
+    const msg = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(msg);
+}
+
+
+const form = document.getElementById("sorterForm");
+const loader = document.getElementById("loader");
+const outputText = document.getElementById("output-text");
+
+form.onsubmit = async function(e) {
+    e.preventDefault();
+    loader.style.display = "flex";
+    outputText.textContent = "";
+
+    try {
+        const response = await fetch(form.action, {
+            method: "POST",
+            headers: { "X-Requested-With": "fetch" },
+            body: new FormData(form)
+        });
+
+        const data = await response.json();   
+
+        outputText.innerText = data.tasks;
+
+    } catch (err) {
+        outputText.textContent = "Something went wrong. Please try again.";
+    } finally {
+        loader.style.display = "none";  // HIDE loader
+    }
+};
+
+</script>
+{% endblock %}
+
+{% endblock %}

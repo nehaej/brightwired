@@ -1,0 +1,62 @@
+<!-- timer stuff -->
+ {% extends "base.html" %}
+
+{% block title %}Focus Timer{% endblock %}
+
+{% block header_title %}Focus Timer{% endblock %}
+
+{% block extra_css %}
+<style>
+    
+    #pomo {
+        font-size: 120px; /* big numbers to focus better ! */
+        font-weight: 800;
+        text-align: center;
+        color: #2d5a88;
+        font-family: 'Courier New', monospace; 
+        margin: 60px 0;
+        text-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    }
+
+    /* timer button only style */
+    .button-wrapper {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    #start1 { background-color: #28a745; color: white; }
+    #stop1 { background-color: #dc3545; color: white; }
+    #reset1 { background-color: #6c757d; color: white; }
+
+    .button-wrapper button {
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+        
+            <section class="intro">
+                <P>The Focus Timer is a guided timer to help you stay on track and achieve your goals for the day!</P>
+            </section>
+
+            <p id="pomo">25:00</p>
+            <div class="button-wrapper">
+                <button id="start1">Start</button>
+                <button id="stop1">Stop</button>
+                <button id="reset1">Reset</button>
+            </div>
+            
+        
+{% endblock %}
+    
+{% block scripts %}
+{{ super() }}
+    <script src="{{ url_for('static', filename='timer.js') }}"></script>
+{% endblock %}

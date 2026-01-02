@@ -1,0 +1,42 @@
+<!-- brain_translator.html-->
+{% extends "base.html" %}
+
+{% block title %}Brain Translator{% endblock %}
+
+{% block header_title %}Brain Translator{% endblock %} 
+
+{% block content %}
+
+<form id="brainform" method="POST" action="/brain-translator">
+    <section class="mode-slct">
+    <p>Paste your complex text in the box below for simplification!
+        <br><br>
+        Choose a mode:</p>
+                    
+        <select name="mode">
+            <option value="Child Core">🧒Child Mode</option>
+            <option value="Academic-Lite">📚 Academic-Lite Mode (Recommended)</option>
+            <option value="Conversational" >💬 Converse Mode</option>
+        </select>
+    </section>
+        <label for="complex">Enter Here:</label>
+        <textarea id="complex" name="complex" rows="20" cols="100" placeholder="Enter Your Text"></textarea>
+        <button type="submit" id="simplify" class="action-button">Simplify!</button>
+</form>
+
+        <section class="output-section">
+            <h2>Your Simplified Output:</h2>
+            <div id="loader" style="display:none;" aria-live="polite" aria-busy="true">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span>Processing your input…</span>
+            </div>
+            <p id="output-text">{{ output or "[Your result will appear here]" }}</p>
+        </section>
+        
+{% block scripts %} 
+{{ super() }} 
+<script src="{{ url_for('static', filename='loader.js') }}"></script>
+{% endblock %}
+{% endblock %}

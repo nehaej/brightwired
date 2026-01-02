@@ -1,0 +1,88 @@
+<!-- features -->
+ <!DOCTYPE html>
+ {% extends "base.html" %}
+
+{% block title %}Brain Translator{% endblock %}
+
+{% block header_title %}Brain Translator{% endblock %} 
+
+{% block content %}
+
+
+            <section>
+                <div class="feature-grid">
+                    <div class="card">
+                        <h2>Planner 📖</h2>
+                        <ul>
+                            <li>Converts daunting tasks into bite-sized chunks.</li>
+                            <li>Suggests breaks and pacing.</li>
+                            <li>Helps beat procrastination and dysfunction.</li>
+                        </ul>
+                        <a href="{{ url_for('planner') }}" class=""action-button>Open Planner</a>
+            </section>
+
+            <section>
+                <div class="feature-grid">
+                    <div class="card">
+                        <h2>Sorter 🧩</h2>
+                        <ul>
+                            <li>Just dump your thoughts.</li>
+                            <li>Get back a plan on exactly what to do.</li>
+                            <li>Takes away the dauntness of having to plan.</li>
+                        </ul>
+                        <a href="{{ url_for('sorter') }}" class=""action-button>Open Sorter</a>
+            </section>
+            
+            
+            <section>
+                <div class="feature-grid">
+                    <div class="card">
+                        <h2>Enco Bot 🤖</h2>
+                        <ul>
+                            <li>Your best buddy for study sessions.</li>
+                            <li>Get instant affirmations when you're feeling down.</li>
+                            <li>Great for student support and keeping motivation levels up.</li>
+                        </ul>
+                    <a href="{{ url_for('enco') }}" class=""action-button>Meet Enco Bot</a>
+            </section>
+            
+            <section>
+                <div class="feature-grid">
+                    <div class="card">
+                        <h2>Summarizer ✂️</h2>
+                        <ul>
+                            <li>Summarizes documents or written material for simplicity and ease of learning.</li>
+                            <li>Choose from different modes to control style and tone</li>
+                            <li>Generate instant AI text summaries for your own ideas as well as pasted text.</li>
+                        </ul>
+                        <a href="{{ url_for('summarizer') }}" class="action-button">Open Summarizer</a>
+            </section>
+
+            <section>
+                <div class="feature-grid">
+                    <div class="card">
+                        <h2>Pomodoro Timer 🕒</h2>
+                        <ul>
+                            <li>A simple pomodoro-style timer to help you control your study time and breaks.</li>
+                            <li>Built with neurodivergent focus retention in mind.</li>
+                        </ul>
+                        <a href="{{ url_for('timer') }}" class="action-button">Open Timer</a>
+            </section>
+
+
+            <section>
+                <h2>Why These Features?</h2>
+                <p>Neurodivergent students often struggle in educational settings due to a lack of supportive tools.
+                   Each BrightWired feature is designed to address a specific challenge—whether it’s reducing distractions,
+                   boosting focus, improving time management, or helping students find personalized study strategies that actually work.
+                </p>
+            </section>
+            <section>
+                <h2>The Backend</h2>
+                <p>BrightWired tackles student difficulties using AI integration.
+                   With tools like speech-to-text, gamification, and adaptive AI-driven support,
+                   <strong>BrightWired is more than just tech—it’s <em>support that adapts to you</em>.</strong>
+                </p>
+            </section>
+
+{% endblock %}

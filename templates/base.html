@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}BrightWired{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1>BrightWired🌟</h1>
+        <nav>
+            <a href="/home">Home</a>
+            <a href="/about">About</a>
+            <a href="/features">Features</a>
+            <a href="/planner">Neuro Planner</a>
+            <a href="/timer">Focus Timer</a>
+            <a href="/summarizer">Summarizer</a>
+            <a href="/enco">Enco Bot</a>
+            <a href="/sorter">Sorter</a>
+        </nav>
+    </header>
+
+    <main>
+        <button id="focusToggle" aria-pressed="false">Enable Focus Mode</button>
+        <p class="mode-info"><em>NOTE: Focus Mode increases spacing and reduces distractions for ADHD and dyslexic users.</em></p>
+
+
+        {% block content %}{% endblock %}
+    </main>
+
+    {% block scripts %}
+    <script src="{{ url_for('static', filename='focusmode.js') }}"></script>
+    {% endblock %}
+
+</body>
+</html>
+

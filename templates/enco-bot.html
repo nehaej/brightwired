@@ -1,0 +1,30 @@
+<!-- Enco :) -->
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block title %}Brain Translator{% endblock %}
+
+{% block header_title %}Brain Translator{% endblock %} 
+
+{% block content %}
+
+            <p>Feeling down? Chat with Enco to recharge!</p>
+            <form method="post">
+                <section class="chat-bubble-input">
+                <input type="text" id="enco-input" name="enco-input" placeholder="Type a message... (e.g., 'I'm feeling demotivated')" required/>
+                <button type="submit">Submit!</button>
+                </section>
+            </form>
+            
+            <section class="chat-bubble-output">
+                <div id="enco-output">
+                    {% if reply %}
+                        {{ reply }}
+                    {% else %}
+                        {Reply is coming.}
+                    {% endif %}
+                </div>
+
+            </section>
+
+{% endblock %}
